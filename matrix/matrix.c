@@ -3,7 +3,7 @@
 #include <pthread.h>
 #include <time.h>
 
-#define MAX 3
+#define MAX 9
 
 int matA[MAX][MAX]; 
 int matB[MAX][MAX]; 
@@ -40,6 +40,7 @@ void* computeSum(void* args) { // pass in the number of the ith thread
   for (int col = 0; col < MAX; col++){
     matSumResult[row][col] = matA[row][col] + matB[row][col];
   }
+  free(args);
   
   return NULL;
 }
@@ -53,6 +54,8 @@ void* computeDiff(void* args) { // pass in the number of the ith thread
     matDiffResult[row][col] = matA[row][col] - matB[row][col];
   }
   
+  free(args);
+  
   return NULL;
 }
 
@@ -65,6 +68,7 @@ void* computeProduct(void* args) { // pass in the number of the ith thread
     matProductResult[row][col] = matA[row][col] * matB[row][col];
   }
   
+  free(args);
   return NULL;
 }
 
